@@ -3,3 +3,101 @@
 @import "tailwindcss/utilities.css";
  
 @import "nativewind/theme";
+
+@theme {
+  --color-deep-ocean: #0b1326;
+  --color-ocean-blue: #1565ff;
+  --color-sky-blue: #38bdf8;
+  --color-aqua: #00e5ff;
+  --color-dolphin-blue: #6c8cff;
+  --color-success: #22c55e;
+  --color-warning: #facc15;
+  --color-streak: #ff7a00;
+  --color-error: #ff4d4f;
+  --color-info: #38bdf8;
+  --color-atomic-purple: #7c3aed;
+  --color-energy-teal: #00d4c4;
+  --color-neon-indigo: #4f46e5;
+  --color-science-cyan: #06b6d4;
+  --color-radiant-blue: #2563eb;
+  --color-primary-text: #f0f2fa;
+  --color-secondary-text: #475569;
+  --color-border: #1e2747;
+  --color-surface: #141b2a;
+  --color-background: #070b1a;
+
+  --font-poppins: "Poppins-Regular";
+  --font-poppins-medium: "Poppins-Medium";
+  --font-poppins-semibold: "Poppins-SemiBold";
+  --font-poppins-bold: "Poppins-Bold";
+
+  --radius-brand-sm: 8px;
+  --radius-brand-md: 12px;
+  --radius-brand-lg: 16px;
+  --radius-brand-xl: 24px;
+}
+
+@layer base {
+  html,
+  body {
+    background-color: #070b1a;
+  }
+}
+
+@layer utilities {
+  .app-screen {
+    @apply flex-1 bg-background px-6;
+  }
+
+  .brand-panel {
+    @apply rounded-brand-md border border-border bg-deep-ocean;
+  }
+
+  .brand-card {
+    @apply rounded-brand-md border border-border bg-surface;
+  }
+
+  .brand-divider {
+    @apply h-px bg-border;
+  }
+
+  .text-h1 {
+    @apply font-poppins-bold text-[32px] leading-[38px] text-primary-text;
+  }
+
+  .text-h2 {
+    @apply font-poppins-semibold text-[24px] leading-[31px] text-primary-text;
+  }
+
+  .text-h3 {
+    @apply font-poppins-semibold text-[20px] leading-[26px] text-primary-text;
+  }
+
+  .text-h4 {
+    @apply font-poppins-medium text-[16px] leading-[22px] text-primary-text;
+  }
+
+  .text-body-lg {
+    @apply font-poppins text-[16px] leading-[26px] text-primary-text;
+  }
+
+  .text-body-md {
+    @apply font-poppins text-[14px] leading-[22px] text-primary-text;
+  }
+
+  .text-body-sm {
+    @apply font-poppins text-[13px] leading-[21px] text-primary-text;
+  }
+
+  .text-caption {
+    @apply font-poppins text-[11px] leading-[15px] text-primary-text;
+  }
+
+  .section-label {
+    @apply font-poppins-semibold text-[13px] uppercase leading-[18px] tracking-[0px] text-atomic-purple;
+  }
+
+  .muted-text {
+    @apply text-secondary-text;
+  }
+}
