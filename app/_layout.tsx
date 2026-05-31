@@ -3,7 +3,7 @@ import { fonts } from "@/theme";
 import { ClerkProvider, useAuth } from "@clerk/expo";
 import { tokenCache } from "@clerk/expo/token-cache";
 import { useFonts } from "expo-font";
-import { Stack, router, useRootNavigation } from "expo-router";
+import { Stack, router } from "expo-router";
 import * as SplashScreen from "expo-splash-screen";
 import { StatusBar } from "expo-status-bar";
 import { useEffect } from "react";
@@ -22,32 +22,20 @@ function ClerkStack() {
   const hasCompletedOnboarding = useOnboardingStore(
     (state) => state.hasCompletedOnboarding,
   );
-  const setHasCompletedOnboarding = useOnboardingStore(
-    (state) => state.setHasCompletedOnboarding,
-  );
   const resetOnboarding = useOnboardingStore((state) => state.resetOnboarding);
-  const navigationReady = useRootNavigation(); // Hook to check if navigator is ready
 
+  // This effect should now be minimal, mostly for resetting state on sign out.
   useEffect(() => {
-    // Only proceed if Clerk is loaded and the navigator is ready
-    if (!isLoaded || !navigationReady) {
+    if (!isLoaded) {
       return;
     }
 
-    if (isSignedIn) {
-      // TODO: Fetch actual onboarding completion status from Supabase here
-      // For now, we are using the Zustand store's state.
-      if (!hasCompletedOnboarding) {
-        router.replace("/(auth)/onboarding");
-      } else {
-        router.replace("/");
-      }
-    } else {
-      // If signed out, reset onboarding state
+    if (!isSignedIn) {
+      // If signed out, reset onboarding state.
       resetOnboarding();
-      router.replace("/(auth)/sign-in");
+      // No router.replace here, let AuthLayout handle the redirect to sign-in.
     }
-  }, [isLoaded, isSignedIn, hasCompletedOnboarding, navigationReady]); // Added navigationReady to dependencies
+  }, [isLoaded, isSignedIn]); // Removed hasCompletedOnboarding and navigationReady
 
   return (
     <>
@@ -58,7 +46,6 @@ function ClerkStack() {
           headerShown: false,
         }}
       >
-        {/* Render Stack.Screen components here */}
         <Stack.Screen
           name="(auth)"
           options={{
