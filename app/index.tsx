@@ -2,11 +2,15 @@ import { useAuth, useClerk } from "@clerk/expo";
 import { Redirect } from "expo-router";
 import { useState } from "react";
 import { Pressable, SafeAreaView, Text, View } from "react-native";
+import { useOnboardingStore } from "@/store/onboarding-store";
 
 export default function HomeScreen() {
   const { isSignedIn, isLoaded } = useAuth();
   const { signOut } = useClerk();
   const [isSigningOut, setIsSigningOut] = useState(false);
+  const hasCompletedOnboarding = useOnboardingStore(
+    (state) => state.hasCompletedOnboarding,
+  );
 
   const handleSignOut = async () => {
     setIsSigningOut(true);
@@ -22,7 +26,7 @@ export default function HomeScreen() {
     return null;
   }
 
-  if (!isSignedIn) {
+  if (!isSignedIn || !hasCompletedOnboarding) {
     return <Redirect href="/(auth)/onboarding" />;
   }
 
