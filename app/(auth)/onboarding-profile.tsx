@@ -1,51 +1,30 @@
-import { Ionicons } from "@expo/vector-icons";
-import { router } from "expo-router";
-import { Image, Pressable, SafeAreaView, Text, View } from "react-native";
-import { StatusBar } from "expo-status-bar";
+// app/(auth)/onboarding-profile.tsx
+import { Stack } from 'expo-router';
+import React from 'react';
+import { Text, View } from 'react-native';
 
-import { images } from "@/constants/images";
-import { useOnboardingStore } from "@/store/onboarding-store";
+// Zustand store
+import useOnboardingStore from '@/store/onboarding-store';
 
 export default function OnboardingProfileScreen() {
-  const setHasCompletedOnboarding = useOnboardingStore(
-    (state) => state.setHasCompletedOnboarding,
-  );
-  const targetExam = useOnboardingStore((state) => state.targetExam);
-
-  const handleContinue = () => {
-    // setHasCompletedOnboarding(true); // REMOVED THIS LINE
-    router.push("./onboarding-goals");
-  };
+  const { targetExam } = useOnboardingStore();
 
   return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: "#020722" }}>
-      <StatusBar barStyle="light-content" />
-
-      <View className="flex-1 px-6 pt-8">
-        <View className="flex-row items-center gap-3">
-          <Pressable onPress={() => router.back()}>
-            <Ionicons name="chevron-back" size={24} color="#FFFFFF" />
-          </Pressable>
-          <Text className="font-poppins-bold text-[20px] leading-[28px] text-white">
-            Set up your profile
-          </Text>
-        </View>
-
-        <View className="flex-1 items-center justify-center">
-          <Text className="text-center font-poppins-bold text-[28px] leading-[36px] text-white">
-            Profile setup coming next
-          </Text>
-        </View>
-
-        <Pressable
-          className="mb-4 h-14 items-center justify-center rounded-[10px] bg-[#7C22F3]"
-          onPress={handleContinue}
-        >
-          <Text className="font-poppins-bold text-[17px] leading-[24px] text-white">
-            Continue
-          </Text>
-        </Pressable>
-      </View>
-    </SafeAreaView>
+    <View className="flex-1 bg-black items-center justify-center p-5">
+      <Stack.Screen
+        options={{
+          headerTitle: 'Onboarding - Profile',
+          headerShown: true, // Show header for this screen
+        }}
+      />
+      <Text className="text-white text-lg font-bold mb-4">Selected Exam (for verification):</Text>
+      {targetExam ? (
+        <Text className="text-purple-400 text-2xl font-bold">{targetExam.title}</Text>
+      ) : (
+        <Text className="text-gray-500 text-xl">No exam selected</Text>
+      )}
+      {/* Add profile-related content here */}
+      <Text className="text-white text-lg mt-8">Profile Screen Content Goes Here</Text>
+    </View>
   );
 }
