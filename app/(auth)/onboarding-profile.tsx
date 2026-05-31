@@ -19,7 +19,7 @@ export default function OnboardingProfileScreen() {
 
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: "#020722" }}>
-      <StatusBar style="light" />
+      <StatusBar barStyle="light-content" />
 
       <View className="flex-1 px-6 pt-8">
         <View className="flex-row items-center gap-3">

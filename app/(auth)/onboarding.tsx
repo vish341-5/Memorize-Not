@@ -47,32 +47,32 @@ const levelStyles: Record<
   StudyLevel,
   {
     icon: keyof typeof MaterialCommunityIcons.glyphMap;
-    color: string;
+    iconClassName: string;
     title: string;
     description: string;
   }
 > = {
   beginner: {
     icon: "sprout",
-    color: "#6BEE43",
+    iconClassName: "text-[#6BEE43]",
     title: "Beginner",
     description: "Just starting out",
   },
   basic: {
     icon: "chart-bar",
-    color: "#2496FF",
+    iconClassName: "text-[#2496FF]",
     title: "Basic",
     description: "Know the basics",
   },
   intermediate: {
     icon: "lightning-bolt",
-    color: "#FFB21B",
+    iconClassName: "text-[#FFB21B]",
     title: "Intermediate",
     description: "Some practice done",
   },
   advanced: {
     icon: "rocket-launch-outline",
-    color: "#FF72D2",
+    iconClassName: "text-[#FF72D2]",
     title: "Advanced",
     description: "Ready for the next level",
   },
@@ -89,12 +89,12 @@ export default function OnboardingScreen() {
       return;
     }
 
-    router.push("./onboarding-profile");
+    router.push("/(auth)/onboarding-profile");
   };
 
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: "#020722" }}>
-      <StatusBar style="light" />
+      <StatusBar barStyle="light-content" />
 
       <ScrollView
         className="flex-1 bg-[#020722]"
@@ -196,7 +196,7 @@ export default function OnboardingScreen() {
                     <MaterialCommunityIcons
                       name={styles.icon}
                       size={34}
-                      color={styles.color}
+                      className={styles.iconClassName}
                     />
                     <Text className="mt-4 text-center font-poppins-bold text-[16px] leading-[22px] text-white">
                       {styles.title}
