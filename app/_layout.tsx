@@ -3,7 +3,7 @@ import { fonts } from "@/theme";
 import { ClerkProvider, useAuth } from "@clerk/expo";
 import { tokenCache } from "@clerk/expo/token-cache";
 import { useFonts } from "expo-font";
-import { Stack, router } from "expo-router";
+import { Stack, router, useRootNavigation } from "expo-router";
 import * as SplashScreen from "expo-splash-screen";
 import { StatusBar } from "expo-status-bar";
 import { useEffect } from "react";
@@ -26,9 +26,11 @@ function ClerkStack() {
     (state) => state.setHasCompletedOnboarding,
   );
   const resetOnboarding = useOnboardingStore((state) => state.resetOnboarding);
+  const navigationReady = useRootNavigation(); // Hook to check if navigator is ready
 
   useEffect(() => {
-    if (!isLoaded) {
+    // Only proceed if Clerk is loaded and the navigator is ready
+    if (!isLoaded || !navigationReady) {
       return;
     }
 
@@ -45,7 +47,7 @@ function ClerkStack() {
       resetOnboarding();
       router.replace("/(auth)/sign-in");
     }
-  }, [isLoaded, isSignedIn, hasCompletedOnboarding]); // Added hasCompletedOnboarding to dependencies
+  }, [isLoaded, isSignedIn, hasCompletedOnboarding, navigationReady]); // Added navigationReady to dependencies
 
   return (
     <>
@@ -56,6 +58,7 @@ function ClerkStack() {
           headerShown: false,
         }}
       >
+        {/* Render Stack.Screen components here */}
         <Stack.Screen
           name="(auth)"
           options={{
