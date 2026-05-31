@@ -1,0 +1,112 @@
+import { create } from "zustand";
+
+import type {
+    AvatarType,
+    ExamType,
+    GoalType,
+    GradeType,
+    StudyLevel,
+    SubjectType,
+} from "@/types/onboarding";
+
+interface OnboardingState {
+  // Welcome Screen
+  targetExam: ExamType | null;
+  currentLevel: StudyLevel | null;
+
+  // Profile Screen
+  avatar: AvatarType | null;
+  nickname: string;
+  grade: GradeType | null;
+
+  // Goals Screen
+  subjects: SubjectType[];
+  targetExamDate: string;
+  dailyStudyHours: number;
+  goals: GoalType[];
+
+  // Completion
+  completed: boolean;
+
+  // Actions
+  setTargetExam: (exam: ExamType) => void;
+  setCurrentLevel: (level: StudyLevel) => void;
+
+  setAvatar: (avatar: AvatarType) => void;
+  setNickname: (nickname: string) => void;
+  setGrade: (grade: GradeType) => void;
+
+  setSubjects: (subjects: SubjectType[]) => void;
+  setTargetExamDate: (date: string) => void;
+  setDailyStudyHours: (hours: number) => void;
+  setGoals: (goals: GoalType[]) => void;
+
+  completeOnboarding: () => void;
+  resetOnboarding: () => void;
+}
+
+export const useOnboardingStore =
+  create<OnboardingState>((set) => ({
+    // Initial State
+    targetExam: null,
+    currentLevel: null,
+
+    avatar: null,
+    nickname: "",
+    grade: null,
+
+    subjects: [],
+    targetExamDate: "",
+    dailyStudyHours: 0,
+    goals: [],
+
+    completed: false,
+
+    // Actions
+    setTargetExam: (exam) =>
+      set({ targetExam: exam }),
+
+    setCurrentLevel: (level) =>
+      set({ currentLevel: level }),
+
+    setAvatar: (avatar) =>
+      set({ avatar }),
+
+    setNickname: (nickname) =>
+      set({ nickname }),
+
+    setGrade: (grade) =>
+      set({ grade }),
+
+    setSubjects: (subjects) =>
+      set({ subjects }),
+
+    setTargetExamDate: (date) =>
+      set({ targetExamDate: date }),
+
+    setDailyStudyHours: (hours) =>
+      set({ dailyStudyHours: hours }),
+
+    setGoals: (goals) =>
+      set({ goals }),
+
+    completeOnboarding: () =>
+      set({ completed: true }),
+
+    resetOnboarding: () =>
+      set({
+        targetExam: null,
+        currentLevel: null,
+
+        avatar: null,
+        nickname: "",
+        grade: null,
+
+        subjects: [],
+        targetExamDate: "",
+        dailyStudyHours: 0,
+        goals: [],
+
+        completed: false,
+      }),
+  }));

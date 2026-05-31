@@ -30,7 +30,7 @@ export default function WelcomeScreen() {
           Let&apos;s learn, practice and achieve{"\n"}your dreams together. 🚀
         </Text>
 
-        <Link href="/(auth)/onboarding" asChild>
+        <Link href="/(auth)/sign-up" asChild>
           <Pressable className="mt-15 h-[60px] w-full items-center justify-center rounded-2xl bg-[#7C22F3]">
             <Text className="text-[20px] font-bold text-white">
               Let&apos;s Get Started →

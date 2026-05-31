@@ -1,5 +1,7 @@
 import "@/global.css";
 import { fonts } from "@/theme";
+import { ClerkProvider, useAuth } from "@clerk/expo";
+import { tokenCache } from "@clerk/expo/token-cache";
 import { useFonts } from "expo-font";
 import { Stack } from "expo-router";
 import * as SplashScreen from "expo-splash-screen";
@@ -7,6 +9,51 @@ import { StatusBar } from "expo-status-bar";
 import { useEffect } from "react";
 
 SplashScreen.preventAutoHideAsync();
+
+const publishableKey = process.env.EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY ?? "";
+
+if (!publishableKey) {
+  throw new Error("Add your Clerk Publishable Key to the .env file");
+}
+
+function ClerkStack() {
+  const { isLoaded } = useAuth();
+
+  if (!isLoaded) {
+    return null;
+  }
+
+  return (
+    <>
+      <StatusBar style="light" backgroundColor="#070B1A" />
+      <Stack
+        screenOptions={{
+          contentStyle: { backgroundColor: "#070B1A" },
+          headerShown: false,
+        }}
+      >
+        <Stack.Screen
+          name="(auth)"
+          options={{
+            headerShown: false,
+          }}
+        />
+        <Stack.Screen
+          name="index"
+          options={{
+            headerShown: false,
+          }}
+        />
+        <Stack.Screen
+          name="welcome"
+          options={{
+            headerShown: false,
+          }}
+        />
+      </Stack>
+    </>
+  );
+}
 
 export default function RootLayout() {
   const [fontsLoaded, fontError] = useFonts({
@@ -27,14 +74,8 @@ export default function RootLayout() {
   }
 
   return (
-    <>
-      <StatusBar style="light" backgroundColor="#070B1A" />
-      <Stack
-        screenOptions={{
-          contentStyle: { backgroundColor: "#070B1A" },
-          headerShown: false,
-        }}
-      />
-    </>
+    <ClerkProvider publishableKey={publishableKey} tokenCache={tokenCache}>
+      <ClerkStack />
+    </ClerkProvider>
   );
 }
