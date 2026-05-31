@@ -60,6 +60,8 @@ export const useOnboardingStore =
     dailyStudyHours: 0,
     goals: [],
 
+    // TODO: Ideally, hasCompletedOnboarding should be fetched from Supabase
+    //       when the user signs in and reset on sign out.
     hasCompletedOnboarding: false,
 
     // Actions
@@ -107,6 +109,7 @@ export const useOnboardingStore =
         dailyStudyHours: 0,
         goals: [],
 
+        // Reset to false on logout/app reset
         hasCompletedOnboarding: false,
       }),
   }));
