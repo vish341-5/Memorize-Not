@@ -1,15 +1,15 @@
 // constants/images.ts
-import { ImageSourcePropType } from 'react-native';
 import { Ionicons } from '@expo/vector-icons'; // Import Ionicons
+import { ImageSourcePropType } from 'react-native';
 
 // --- Main Images ---
 // It's good practice to have these, even if they are just placeholders for now.
 // If you have actual image files for these, please ensure they are in the correct path.
 // Example: Assuming you have these files in assets/images/
-import splashIcon from '@/assets/images/splash-icon.png';
 import firstOnboardingBg from '@/assets/images/first-onboarding-bg.png'; // Assuming this exists
 import firstOnboardingTitle from '@/assets/images/first-onboarding-title.png'; // Assuming this exists
-import pixelMascot from '@/assets/images/pixel-mascot.png'; // Assuming this exists
+import pixelMascot from '@/assets/images/pixel.png'; // Assuming this exists
+import splashIcon from '@/assets/images/splash-icon.png';
 
 export const images = {
   // Main Images
