@@ -3,10 +3,11 @@ import { fonts } from "@/theme";
 import { ClerkProvider, useAuth } from "@clerk/expo";
 import { tokenCache } from "@clerk/expo/token-cache";
 import { useFonts } from "expo-font";
-import { Stack } from "expo-router";
+import { Stack, router } from "expo-router";
 import * as SplashScreen from "expo-splash-screen";
 import { StatusBar } from "expo-status-bar";
 import { useEffect } from "react";
+import { useOnboardingStore } from "@/store/onboarding-store";
 
 SplashScreen.preventAutoHideAsync();
 
@@ -17,11 +18,34 @@ if (!publishableKey) {
 }
 
 function ClerkStack() {
-  const { isLoaded } = useAuth();
+  const { isLoaded, isSignedIn } = useAuth();
+  const hasCompletedOnboarding = useOnboardingStore(
+    (state) => state.hasCompletedOnboarding,
+  );
+  const setHasCompletedOnboarding = useOnboardingStore(
+    (state) => state.setHasCompletedOnboarding,
+  );
+  const resetOnboarding = useOnboardingStore((state) => state.resetOnboarding);
 
-  if (!isLoaded) {
-    return null;
-  }
+  useEffect(() => {
+    if (!isLoaded) {
+      return;
+    }
+
+    if (isSignedIn) {
+      // TODO: Fetch actual onboarding completion status from Supabase here
+      // For now, we are using the Zustand store's state.
+      if (!hasCompletedOnboarding) {
+        router.replace("/(auth)/onboarding");
+      } else {
+        router.replace("/");
+      }
+    } else {
+      // If signed out, reset onboarding state
+      resetOnboarding();
+      router.replace("/(auth)/sign-in");
+    }
+  }, [isLoaded, isSignedIn, hasCompletedOnboarding]); // Added hasCompletedOnboarding to dependencies
 
   return (
     <>
