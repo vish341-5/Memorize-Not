@@ -1,142 +1,40 @@
-import type {
-    AvatarType,
-    ExamType,
-    GoalType,
-    GradeType,
-    StudyLevel,
-    SubjectType,
-} from "@/types/onboarding";
+// data/onboarding.ts
+import { images } from '@/constants/images'; // Assuming images are centrally imported
 
-export const EXAMS: {
-  id: ExamType;
-  title: string;
-  description: string;
-}[] = [
-  {
-    id: "jee-advanced",
-    title: "JEE Advanced",
-    description: "Prepare for India's toughest engineering entrance exam.",
-  },
-  {
-    id: "jee-main",
-    title: "JEE Main",
-    description: "Build a strong foundation for engineering admissions.",
-  },
-  {
-    id: "neet",
-    title: "NEET",
-    description: "Master Biology, Physics, and Chemistry for medical entrance.",
-  },
-  {
-    id: "boards",
-    title: "Boards",
-    description: "Improve academic performance and board exam scores.",
-  },
-];
+const onboardingData = {
+  exams: [
+    {
+      id: 'jee_advanced',
+      title: 'Crack JEE Advanced',
+      description: 'Compete with the best and secure your dream rank',
+      icon: images.jeeAdvancedIcon, // Use the correct key from constants/images.ts
+    },
+    {
+      id: 'jee_main',
+      title: 'Crack JEE Main',
+      description: 'Score high and get into a top engineering college',
+      icon: images.jeeMainIcon, // Use the correct key from constants/images.ts
+    },
+    {
+      id: 'neet',
+      title: 'Crack NEET',
+      description: 'Pursue your dream of becoming a doctor',
+      icon: images.neetIcon, // Use the correct key from constants/images.ts
+    },
+    {
+      id: 'boards',
+      title: 'Prepare for Boards',
+      description: 'Score high in your board exams with confidence',
+      icon: images.boardsIcon, // Use the correct key from constants/images.ts
+    },
+  ],
+  // Add other onboarding related data here, e.g., levels
+  levels: [
+    { id: 'beginner', title: 'Beginner', description: 'Just starting out', icon: images.beginnerIcon },
+    { id: 'basic', title: 'Basic', description: 'Know the basics', icon: images.basicIcon },
+    { id: 'intermediate', title: 'Intermediate', description: 'Some practice done', icon: images.intermediateIcon },
+    { id: 'advanced', title: 'Advanced', description: 'Ready for the next level', icon: images.advancedIcon },
+  ],
+};
 
-export const STUDY_LEVELS: {
-  id: StudyLevel;
-  title: string;
-  description: string;
-}[] = [
-  {
-    id: "beginner",
-    title: "Beginner",
-    description: "Just getting started.",
-  },
-  {
-    id: "basic",
-    title: "Basic",
-    description: "Know some fundamentals.",
-  },
-  {
-    id: "intermediate",
-    title: "Intermediate",
-    description: "Comfortable with most concepts.",
-  },
-  {
-    id: "advanced",
-    title: "Advanced",
-    description: "Ready for challenging problems.",
-  },
-];
-
-export const AVATARS: {
-  id: AvatarType;
-  title: string;
-}[] = [
-  { id: "default", title: "Default" },
-  { id: "reader", title: "Reader" },
-  { id: "gym", title: "Athlete" },
-  { id: "scientist", title: "Scientist" },
-  { id: "rocket", title: "Rocket" },
-  { id: "explorer", title: "Explorer" },
-  { id: "coder", title: "Coder" },
-  { id: "surfer", title: "Surfer" },
-];
-
-export const GRADES: {
-  id: GradeType;
-  title: string;
-}[] = [
-  { id: "11th", title: "Class 11" },
-  { id: "12th", title: "Class 12" },
-  { id: "dropper", title: "Dropper" },
-  { id: "college", title: "College" },
-];
-
-export const SUBJECTS: {
-  id: SubjectType;
-  title: string;
-}[] = [
-  { id: "physics", title: "Physics" },
-  { id: "chemistry", title: "Chemistry" },
-  { id: "mathematics", title: "Mathematics" },
-];
-
-export const GOALS: {
-  id: GoalType;
-  title: string;
-  description: string;
-}[] = [
-  {
-    id: "improve-rank",
-    title: "Improve Rank",
-    description: "Climb higher in rankings and exams.",
-  },
-  {
-    id: "solve-more-problems",
-    title: "Solve More Problems",
-    description: "Increase problem-solving consistency.",
-  },
-  {
-    id: "concept-clarity",
-    title: "Concept Clarity",
-    description: "Strengthen fundamentals and understanding.",
-  },
-  {
-    id: "be-consistent",
-    title: "Stay Consistent",
-    description: "Build a sustainable study habit.",
-  },
-  {
-    id: "score-high",
-    title: "Score Higher",
-    description: "Improve test scores and performance.",
-  },
-  {
-    id: "compete-and-win",
-    title: "Compete & Win",
-    description: "Dominate contests and leaderboards.",
-  },
-  {
-    id: "track-progress",
-    title: "Track Progress",
-    description: "Monitor growth over time.",
-  },
-  {
-    id: "build-basics",
-    title: "Build Basics",
-    description: "Strengthen core concepts.",
-  },
-];
+export default onboardingData;
