@@ -13,7 +13,7 @@ export default function OnboardingProfileScreen() {
   const targetExam = useOnboardingStore((state) => state.targetExam);
 
   const handleContinue = () => {
-    setHasCompletedOnboarding(true);
+    // setHasCompletedOnboarding(true); // REMOVED THIS LINE
     router.push("./onboarding-goals");
   };
 
