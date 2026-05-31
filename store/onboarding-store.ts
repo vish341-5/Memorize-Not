@@ -26,7 +26,7 @@ interface OnboardingState {
   goals: GoalType[];
 
   // Completion
-  completed: boolean;
+  hasCompletedOnboarding: boolean;
 
   // Actions
   setTargetExam: (exam: ExamType) => void;
@@ -41,7 +41,7 @@ interface OnboardingState {
   setDailyStudyHours: (hours: number) => void;
   setGoals: (goals: GoalType[]) => void;
 
-  completeOnboarding: () => void;
+  setHasCompletedOnboarding: (completed: boolean) => void;
   resetOnboarding: () => void;
 }
 
@@ -60,7 +60,7 @@ export const useOnboardingStore =
     dailyStudyHours: 0,
     goals: [],
 
-    completed: false,
+    hasCompletedOnboarding: false,
 
     // Actions
     setTargetExam: (exam) =>
@@ -90,8 +90,8 @@ export const useOnboardingStore =
     setGoals: (goals) =>
       set({ goals }),
 
-    completeOnboarding: () =>
-      set({ completed: true }),
+    setHasCompletedOnboarding: (completed) =>
+      set({ hasCompletedOnboarding: completed }),
 
     resetOnboarding: () =>
       set({
@@ -107,6 +107,6 @@ export const useOnboardingStore =
         dailyStudyHours: 0,
         goals: [],
 
-        completed: false,
+        hasCompletedOnboarding: false,
       }),
   }));
