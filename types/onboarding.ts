@@ -1,6 +1,6 @@
 export type ExamType =
-  | "jee-advanced"
-  | "jee-main"
+  | "jee_advanced"
+  | "jee_main"
   | "neet"
   | "boards";
 
@@ -21,10 +21,10 @@ export type AvatarType =
   | "surfer";
 
 export type GradeType =
-  | "11th"
-  | "12th"
-  | "dropper"
-  | "college";
+  | "Class 11th"
+  | "Class 12th"
+  | "1st Year Dropper"
+  | "2nd Year Dropper";
 
 export type SubjectType =
   | "physics"
@@ -42,21 +42,14 @@ export type GoalType =
   | "build-basics";
 
 export interface OnboardingData {
-  // Welcome Screen
   targetExam: ExamType | null;
   currentLevel: StudyLevel | null;
-
-  // Profile Screen
   avatar: AvatarType | null;
   nickname: string | null;
   grade: GradeType | null;
-
-  // Goals Screen
   subjects: SubjectType[];
   targetExamDate: string;
   dailyStudyHours: number;
   goals: GoalType[];
-
-  // Completion
   completed: boolean;
 }
